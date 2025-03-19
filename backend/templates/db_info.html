@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{% block title %}Datenbankinformationen - Meine Webanwendung{% endblock %}
+{% block content %}
+<div class="card">
+    <div class="card-header bg-primary text-white">
+        <h2>Datenbankinformationen</h2>
+    </div>
+    <div class="card-body">
+        <h3>SQLite-Datenbank Schema</h3>
+        <p>Die Anwendung verwendet eine SQLite-Datenbank mit dem folgenden Schema:</p>
+
+        {% for table_name, table_info in tables.items() %}
+            <div class="card mb-4">
+                <div class="card-header d-flex justify-content-between">
+                    <h4>{{ table_name }}</h4>
+                    <span class="badge bg-info">{{ table_info.count }} Einträge</span>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    {% for column in table_info.columns %}
+                                        <th>{{ column }}</th>
+                                    {% endfor %}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    {% for column in table_info.columns %}
+                                        <td>...</td>
+                                    {% endfor %}
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+        <h3>Datenbankdetails</h3>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <strong>Datenbanktyp:</strong> SQLite
+            </li>
+            <li class="list-group-item">
+                <strong>ORM:</strong> SQLAlchemy
+            </li>
+            <li class="list-group-item">
+                <strong>Speicherort:</strong> backend/database.db
+            </li>
+            <li class="list-group-item">
+                <strong>Beziehungen:</strong> SalesData referenziert Product (Fremdschlüssel)
+            </li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

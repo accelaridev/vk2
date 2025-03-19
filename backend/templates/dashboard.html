@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+{% block title %}Dashboard - Meine Webanwendung{% endblock %}
+{% block content %}
+<div class="card">
+    <div class="card-header bg-primary text-white">
+        <h2>Dashboard</h2>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-3 mb-3">
+                <div class="card bg-primary text-white">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Benutzer</h5>
+                        <h2>{{ stats.user_count }}</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card bg-success text-white">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Produkte</h5>
+                        <h2>{{ stats.product_count }}</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card bg-info text-white">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Verkäufe</h5>
+                        <h2>{{ stats.sales_count }}</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card bg-warning text-dark">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Umsatz</h5>
+                        <h2>{{ format_price(stats.total_revenue) }}</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        Neueste Benutzer
+                    </div>
+                    <div class="card-body">
+                        {% if users %}
+                            <ul class="list-group">
+                                {% for user in users %}
+                                    <li class="list-group-item">{{ user.username }} - {{ user.email }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <p>Keine Benutzer gefunden.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        Neueste Produkte
+                    </div>
+                    <div class="card-body">
+                        {% if products %}
+                            <ul class="list-group">
+                                {% for product in products %}
+                                    <li class="list-group-item">{{ product.name }} - {{ format_price(product.price) }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <p>Keine Produkte gefunden.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
